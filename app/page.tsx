@@ -4,15 +4,19 @@ export default function Page() {
   return (
     <section>
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        My Portfolio
+        Manansh Shukla
       </h1>
-      <p className="mb-4">
-        {`I'm a Vim enthusiast and tab advocate, finding unmatched efficiency in
-        Vim's keystroke commands and tabs' flexibility for personal viewing
-        preferences. This extends to my support for static typing, where its
-        early error detection ensures cleaner code, and my preference for dark
-        mode, which eases long coding sessions by reducing eye strain.`}
-      </p>
+      <div className="mb-4 space-y-4">
+        <p>
+          I'm a systems thinker, builder, and researcher.
+        </p>
+        <p>
+          I co-founded <a href="https://www.openux.xyz" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 underline">OpenUX</a>, where I led UX research with leading crypto companies and protocols.
+        </p>
+        <p>
+          My work blends inner exploration with technology, designing systems that foster deep self-awareness, alignment, and flow.
+        </p>
+      </div>
       <div className="my-8">
         <BlogPosts />
       </div>

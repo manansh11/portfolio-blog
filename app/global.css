@@ -6,6 +6,7 @@
 }
 
 :root {
+  /* Syntax highlighting variables */
   --sh-class: #2d5e9d;
   --sh-identifier: #354150;
   --sh-sign: #8996a3;
@@ -15,6 +16,13 @@
   --sh-jsxliterals: #6266d1;
   --sh-property: #e25a1c;
   --sh-entity: #e25a1c;
+  
+  /* Theme colors */
+  --oxford-blue: #192338;    /* Oxford Blue - Background */
+  --white: #FFFFFF;          /* White - Regular text */
+  --jordy-blue: #8FB3E2;     /* Jordy Blue - Headings */
+  --lavender: #D9E1F1;       /* Lavender Web - Links */
+  --yinmn-blue: #31487A;     /* YInMn Blue - Buttons */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,6 +35,33 @@
   html {
     color-scheme: dark;
   }
+}
+
+/* Basic theme styling */
+a {
+  color: var(--lavender);
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--jordy-blue);
+}
+
+button {
+  background-color: var(--yinmn-blue);
+  color: var(--white);
+  border-radius: 0.25rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--jordy-blue);
 }
 
 html {
@@ -148,3 +183,4 @@ table {
 .title {
   text-wrap: balance;
 }
+

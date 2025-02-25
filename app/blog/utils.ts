@@ -3,8 +3,10 @@ import path from 'path'
 
 type Metadata = {
   title: string
-  publishedAt: string
-  summary: string
+  publishedAt?: string
+  date?: string
+  summary?: string
+  description?: string
   image?: string
 }
 
@@ -32,7 +34,23 @@ function getMDXFiles(dir) {
 
 function readMDXFile(filePath) {
   let rawContent = fs.readFileSync(filePath, 'utf-8')
-  return parseFrontmatter(rawContent)
+  let { metadata, content } = parseFrontmatter(rawContent)
+  
+  // Ensure compatibility between date and publishedAt
+  if (metadata.date && !metadata.publishedAt) {
+    metadata.publishedAt = metadata.date
+  } else if (metadata.publishedAt && !metadata.date) {
+    metadata.date = metadata.publishedAt
+  }
+  
+  // Ensure compatibility between summary and description
+  if (metadata.description && !metadata.summary) {
+    metadata.summary = metadata.description
+  } else if (metadata.summary && !metadata.description) {
+    metadata.description = metadata.summary
+  }
+  
+  return { metadata, content }
 }
 
 function getMDXData(dir) {
@@ -55,7 +73,9 @@ export function getBlogPosts() {
 
 export function formatDate(date: string, includeRelative = false) {
   let currentDate = new Date()
-  if (!date.includes('T')) {
+  if (!date || typeof date !== 'string') {
+    date = new Date().toISOString()
+  } else if (!date.includes('T')) {
     date = `${date}T00:00:00`
   }
   let targetDate = new Date(date)
@@ -77,8 +97,8 @@ export function formatDate(date: string, includeRelative = false) {
   }
 
   let fullDate = targetDate.toLocaleString('en-us', {
-    month: 'long',
-    day: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
     year: 'numeric',
   })
 
