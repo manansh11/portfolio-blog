@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { NextResponse } from 'next/server'
 import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
@@ -11,10 +11,10 @@ export async function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }) {
+export function generateMetadata({ params }: { params: { slug: string } }) {
   let post = getBlogPosts().find((post) => post.slug === params.slug)
   if (!post) {
-    return
+    return {}
   }
 
   let {
@@ -51,11 +51,19 @@ export function generateMetadata({ params }) {
   }
 }
 
-export default function Blog({ params }) {
+export default function Blog({ params }: { params: { slug: string } }) {
   let post = getBlogPosts().find((post) => post.slug === params.slug)
 
   if (!post) {
-    notFound()
+    // Replace notFound() with a redirect or custom 404 page
+    return (
+      <section>
+        <h1 className="title font-semibold text-2xl tracking-tighter">
+          Post not found
+        </h1>
+        <p>The requested post could not be found.</p>
+      </section>
+    )
   }
 
   return (
@@ -68,16 +76,16 @@ export default function Blog({ params }) {
             '@context': 'https://schema.org',
             '@type': 'BlogPosting',
             headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
+            datePublished: post.metadata.publishedAt || '',
+            dateModified: post.metadata.publishedAt || '',
+            description: post.metadata.summary || '',
             image: post.metadata.image
               ? `${baseUrl}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
             url: `${baseUrl}/blog/${post.slug}`,
             author: {
               '@type': 'Person',
-              name: 'My Portfolio',
+              name: 'Manansh Shukla',
             },
           }),
         }}
@@ -87,7 +95,7 @@ export default function Blog({ params }) {
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
+          {formatDate(post.metadata.publishedAt || '')}
         </p>
       </div>
       <article className="prose">
