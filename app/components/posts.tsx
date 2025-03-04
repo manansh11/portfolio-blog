@@ -8,7 +8,11 @@ export function BlogPosts() {
   
   // Sort posts by date, newest first
   const sortedBlogs = allBlogs.sort((a, b) => {
-    if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
+    // Default dates if publishedAt is undefined
+    const dateA = a.metadata.publishedAt ? new Date(a.metadata.publishedAt) : new Date(0);
+    const dateB = b.metadata.publishedAt ? new Date(b.metadata.publishedAt) : new Date(0);
+    
+    if (dateA > dateB) {
       return -1
     }
     return 1
@@ -18,7 +22,7 @@ export function BlogPosts() {
   const blogData = sortedBlogs.map(post => ({
     slug: post.slug,
     title: post.metadata.title,
-    date: formatDate(post.metadata.publishedAt, false)
+    date: formatDate(post.metadata.publishedAt || '', false)
   }))
 
   return <BlogPostsPagination posts={blogData} postsPerPage={5} />
