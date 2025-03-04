@@ -9,7 +9,10 @@ const navItems = {
   },
   '/blog': {
     name: 'blog',
-  }
+  },
+  '/llm': {
+    name: 'LLM.txt',
+  },
 }
 
 export function Navbar() {
