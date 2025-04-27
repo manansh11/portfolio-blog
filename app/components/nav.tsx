@@ -10,6 +10,9 @@ const navItems = {
   '/blog': {
     name: 'blog',
   },
+  '/coaching': {
+    name: 'coaching',
+  },
   '/llm': {
     name: 'LLM.txt',
   },
