@@ -80,6 +80,25 @@ body {
   html, body {
     color: #FFFFFF !important;
   }
+  
+  /* Force all prose text to be white on mobile */
+  .prose p, .prose li, .prose span, .prose div {
+    color: #FFFFFF !important;
+  }
+  
+  /* Override any Tailwind dark mode classes on mobile */
+  * {
+    color: #FFFFFF !important;
+  }
+  
+  /* Keep headings and links with their proper colors */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--jordy-blue) !important;
+  }
+  
+  a {
+    color: var(--lavender) !important;
+  }
 }
 
 .prose .anchor {
