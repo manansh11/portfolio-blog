@@ -99,6 +99,11 @@ body {
   a {
     color: var(--lavender) !important;
   }
+  
+  /* Preserve blog title colors (they use p tags with inline styles) */
+  p[style*="var(--jordy-blue)"] {
+    color: var(--jordy-blue) !important;
+  }
 }
 
 .prose .anchor {
