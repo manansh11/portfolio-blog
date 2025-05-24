@@ -66,6 +66,20 @@ h1, h2, h3, h4, h5, h6 {
 
 html {
   min-width: 360px;
+  background-color: var(--oxford-blue);
+  color: var(--white);
+}
+
+/* Ensure text color is properly applied on mobile */
+body {
+  color: var(--white);
+}
+
+/* Mobile-specific text color fix */
+@media screen and (max-width: 768px) {
+  html, body {
+    color: #FFFFFF !important;
+  }
 }
 
 .prose .anchor {
