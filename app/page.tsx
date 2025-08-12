@@ -14,9 +14,6 @@ export default function Page() {
           I co-founded <a href="https://www.openux.xyz" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 underline">OpenUX</a>, where I currently conduct UX research with leading crypto companies and protocols.
         </p>
         <p>
-          I write <a href="https://manansh.substack.com/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 underline">InnerNet</a>, a newsletter mixing the internet with inner work.
-        </p>
-        <p>
           My work blends inner exploration with technology, designing systems that foster deep self-awareness, alignment, and flow.
         </p>
       </div>
