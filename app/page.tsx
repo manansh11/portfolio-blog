@@ -14,7 +14,7 @@ export default function Page() {
           I co-founded <a href="https://www.openux.xyz" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 underline">OpenUX</a>, where I currently conduct UX research with leading crypto companies and protocols.
         </p>
         <p>
-          My work blends inner exploration with technology, designing systems that foster deep self-awareness, alignment, and flow.
+          I explore consciousness x technology, below is some of my latest thoughts.
         </p>
       </div>
       <div className="my-8">
