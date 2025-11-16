@@ -8,13 +8,7 @@ export default function Page() {
       </h1>
       <div className="mb-4 space-y-4">
         <p>
-          I'm a systems thinker, builder, and researcher.
-        </p>
-        <p>
           I co-founded <a href="https://www.openux.xyz" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 underline">OpenUX</a>, where I currently conduct UX research with leading crypto companies and protocols.
-        </p>
-        <p>
-          I explore consciousness x technology, read my thoughts below.
         </p>
       </div>
       <div className="my-8">
