@@ -71,6 +71,25 @@ export function getBlogPosts() {
   return getMDXData(path.join(process.cwd(), 'app', 'blog', 'posts'))
 }
 
+export function getReadingTime(content: string): string {
+  // Strip markdown syntax
+  let plain = content
+    .replace(/---[\s\S]*?---/g, '')       // frontmatter
+    .replace(/```[\s\S]*?```/g, '')        // code blocks
+    .replace(/`[^`]*`/g, '')              // inline code
+    .replace(/!\[.*?\]\(.*?\)/g, '')       // images
+    .replace(/\[([^\]]*)\]\(.*?\)/g, '$1') // links → text
+    .replace(/#{1,6}\s+/g, '')            // headings
+    .replace(/[*_~>|+-]/g, '')            // emphasis, blockquotes, lists
+    .replace(/<[^>]+>/g, '')              // HTML tags
+    .replace(/\n+/g, ' ')                // collapse newlines
+    .trim()
+
+  let words = plain.split(/\s+/).filter(Boolean).length
+  let minutes = Math.max(1, Math.ceil(words / 238))
+  return `${minutes} min read`
+}
+
 export function formatDate(date: string, includeRelative = false) {
   let currentDate = new Date()
   if (!date || typeof date !== 'string') {

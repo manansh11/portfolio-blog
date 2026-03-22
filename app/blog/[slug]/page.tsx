@@ -1,31 +1,26 @@
-import { NextResponse } from 'next/server'
 import { CustomMDX } from 'app/components/mdx'
-import { formatDate, getBlogPosts } from 'app/blog/utils'
+import { formatDate, getReadingTime, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
+import { SpeedReader } from 'app/components/speed-reader'
+import { ReadingProgress } from 'app/components/reading-progress'
+import Link from 'next/link'
 
 export async function generateStaticParams() {
-  let posts = getBlogPosts()
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
+  return getBlogPosts().map((post) => ({ slug: post.slug }))
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
-  if (!post) {
-    return {}
-  }
+  const post = getBlogPosts().find((p) => p.slug === params.slug)
+  if (!post) return {}
 
-  let {
+  const {
     title,
     publishedAt: publishedTime,
     summary: description,
     image,
   } = post.metadata
-  let ogImage = image
-    ? image
-    : `${baseUrl}/og?title=${encodeURIComponent(title)}`
+
+  const ogImage = image || `${baseUrl}/og?title=${encodeURIComponent(title)}`
 
   return {
     title,
@@ -36,11 +31,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
       type: 'article',
       publishedTime,
       url: `${baseUrl}/blog/${post.slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
+      images: [{ url: ogImage }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -52,22 +43,19 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 }
 
 export default function Blog({ params }: { params: { slug: string } }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+  const post = getBlogPosts().find((p) => p.slug === params.slug)
 
   if (!post) {
-    // Replace notFound() with a redirect or custom 404 page
     return (
       <section>
-        <h1 className="title font-semibold text-2xl tracking-tighter">
-          Post not found
-        </h1>
-        <p>The requested post could not be found.</p>
+        <h1 className="post-title">Post not found</h1>
       </section>
     )
   }
 
   return (
-    <section>
+    <section className="blog-post-container">
+      <ReadingProgress />
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -83,24 +71,38 @@ export default function Blog({ params }: { params: { slug: string } }) {
               ? `${baseUrl}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
             url: `${baseUrl}/blog/${post.slug}`,
-            author: {
-              '@type': 'Person',
-              name: 'Manansh Shukla',
-            },
+            author: { '@type': 'Person', name: 'Manansh Shukla' },
           }),
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+
+      <div className="post-back-link">
+        <Link href="/blog" className="back-link">
+          ← Back to all writing
+        </Link>
+      </div>
+
+      <div className="post-header">
+        <h1 className="title post-title">{post.metadata.title}</h1>
+        <p className="post-date">
           {formatDate(post.metadata.publishedAt || '')}
+          <span className="post-reading-time"> · {getReadingTime(post.content)}</span>
         </p>
       </div>
-      <article className="prose">
+
+      <div style={{ marginBottom: '32px' }}>
+        <SpeedReader content={post.content} />
+      </div>
+
+      <article className="prose post-body">
         <CustomMDX source={post.content} />
       </article>
+
+      <div className="post-back-link post-back-bottom">
+        <Link href="/blog" className="back-link">
+          ← Back to all writing
+        </Link>
+      </div>
     </section>
   )
 }
