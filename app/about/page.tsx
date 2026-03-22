@@ -20,9 +20,6 @@ export default function AboutPage() {
   return (
     <section className="about-layout">
       <div className="about-bio">
-        <h1 className="about-heading">
-          I am interested in <em>aliveness.</em>
-        </h1>
         <p className="about-body">
           I co-founded{' '}
           <a
