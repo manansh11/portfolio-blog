@@ -23,6 +23,10 @@ export default function Page() {
             <p className="featured-excerpt">
               {featured.metadata.summary || featured.content.slice(0, 140).trim() + '…'}
             </p>
+            <span className="featured-cta">
+              Read post
+              <span className="featured-arrow" aria-hidden="true">→</span>
+            </span>
           </Link>
         )}
         {secondary && (

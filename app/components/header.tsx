@@ -61,15 +61,13 @@ export function Header() {
           className="theme-toggle"
           style={{
             justifyContent: theme === 'dark' ? 'flex-start' : 'flex-end',
-            backgroundColor: theme === 'dark'
-              ? 'rgba(143, 174, 139, 0.12)'
-              : '#D4DDD0',
+            backgroundColor: 'var(--mg-toggle-bg)',
           }}
         >
           <span
             className="theme-toggle-dot"
             style={{
-              backgroundColor: theme === 'dark' ? '#8FAE8B' : '#1A2E1C',
+              backgroundColor: 'var(--mg-toggle-dot)',
             }}
           />
         </button>
@@ -86,6 +84,9 @@ export function Header() {
         }
         .site-header[data-home] {
           align-items: flex-end;
+        }
+        .site-header:not([data-home]) {
+          margin-bottom: 28px;
         }
         .site-name {
           font-family: "Instrument Serif", system-ui, serif;
@@ -131,6 +132,9 @@ export function Header() {
         @media (min-width: 640px) {
           .site-header {
             padding-bottom: 20px;
+          }
+          .site-header:not([data-home]) {
+            margin-bottom: 32px;
           }
           .site-name {
             font-size: 33px;

@@ -1,44 +1,50 @@
 @import 'tailwindcss';
 
-/* ─── Midnight Garden Design Tokens ─── */
+/* ─── Soft Plum Design Tokens ─── */
 
 :root {
   /* Light mode (default) */
-  --mg-bg: #F0F4EE;
-  --mg-heading: #1A2E1C;
-  --mg-body: #4A6A4E;
-  --mg-body-light: #4A6A4E;
-  --mg-accent: #2D6A3A;
-  --mg-muted: #6B8A6E;
-  --mg-border: rgba(45, 106, 58, 0.12);
-  --mg-border-faint: rgba(45, 106, 58, 0.08);
+  --mg-bg: #F8F4F1;
+  --mg-heading: #211725;
+  --mg-body: #574D59;
+  --mg-body-light: #574D59;
+  --mg-home-description: #726674;
+  --mg-accent: #8A4566;
+  --mg-muted: #887C86;
+  --mg-border: rgba(138, 69, 102, 0.14);
+  --mg-border-faint: rgba(138, 69, 102, 0.08);
+  --mg-toggle-bg: #E6DADF;
+  --mg-toggle-dot: #2A1F2D;
 
   /* Syntax highlighting */
-  --sh-class: #2d5e9d;
-  --sh-identifier: #354150;
-  --sh-sign: #8996a3;
-  --sh-string: #007f7a;
-  --sh-keyword: #e02518;
-  --sh-comment: #a19595;
-  --sh-jsxliterals: #6266d1;
-  --sh-property: #e25a1c;
-  --sh-entity: #e25a1c;
+  --sh-class: #76568B;
+  --sh-identifier: #574D59;
+  --sh-sign: #887C86;
+  --sh-string: #8A4566;
+  --sh-keyword: #B14F78;
+  --sh-comment: #A1959B;
+  --sh-jsxliterals: #76568B;
+  --sh-property: #9C5B4B;
+  --sh-entity: #9C5B4B;
 }
 
 [data-theme="dark"] {
-  --mg-bg: #0B1411;
-  --mg-heading: #C8D5C0;
-  --mg-body: #7A8E77;
-  --mg-body-light: #C8C8BC;
-  --mg-accent: #8FAE8B;
-  --mg-muted: #4D6349;
-  --mg-border: rgba(143, 174, 139, 0.15);
-  --mg-border-faint: rgba(143, 174, 139, 0.10);
+  --mg-bg: #17111A;
+  --mg-heading: #F0E2EC;
+  --mg-body: #CBB8C6;
+  --mg-body-light: #E6D8E2;
+  --mg-home-description: #A994A3;
+  --mg-accent: #D384AA;
+  --mg-muted: #9B8796;
+  --mg-border: rgba(211, 132, 170, 0.18);
+  --mg-border-faint: rgba(211, 132, 170, 0.10);
+  --mg-toggle-bg: rgba(211, 132, 170, 0.14);
+  --mg-toggle-dot: #D384AA;
 
-  --sh-class: #4c97f8;
-  --sh-identifier: #C8D5C0;
-  --sh-keyword: #f47067;
-  --sh-string: #0fa295;
+  --sh-class: #B887D5;
+  --sh-identifier: #F0E2EC;
+  --sh-keyword: #E493B9;
+  --sh-string: #D384AA;
 
   color-scheme: dark;
 }
@@ -785,16 +791,41 @@ table {
 }
 
 .featured-main {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom: 20px;
+  padding: 0 0 20px 18px;
+  border-radius: 8px;
+  background: transparent;
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .featured-main:hover {
-  opacity: 0.85;
+  background: color-mix(in srgb, var(--mg-accent), transparent 97%);
+  transform: translateY(-1px);
+}
+
+.featured-main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 20px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 999px 999px 0;
+  background: color-mix(in srgb, var(--mg-accent), transparent 36%);
+  opacity: 0.72;
+  transition: opacity 0.2s ease;
+}
+
+.featured-main:hover::before {
+  opacity: 1;
+}
+
+.featured-main:hover .featured-arrow {
+  transform: translateX(3px);
 }
 
 .featured-title {
@@ -811,16 +842,36 @@ table {
   font-weight: 400;
   font-size: 17px;
   line-height: 1.5;
-  color: var(--mg-body);
+  color: var(--mg-home-description);
   margin: 0;
+}
+
+.featured-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-top: 6px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid color-mix(in srgb, var(--mg-accent), transparent 45%);
+  color: var(--mg-accent);
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.featured-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
 }
 
 .featured-secondary {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-top: 20px;
-  border-top: 1px solid var(--mg-border-faint);
+  padding-top: 24px;
+  border-top: 1px solid var(--mg-border);
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
@@ -843,7 +894,7 @@ table {
   font-weight: 400;
   font-size: 17px;
   line-height: 1.5;
-  color: var(--mg-body);
+  color: var(--mg-home-description);
   margin: 0;
 }
 
@@ -871,12 +922,12 @@ table {
   }
   .featured-section {
     flex-direction: row;
-    gap: 40px;
+    gap: 32px;
     padding-top: 32px;
   }
   .featured-main {
     flex: 1.3 1 0%;
-    padding-bottom: 0;
+    padding: 0 0 0 20px;
   }
   .featured-title {
     font-size: clamp(40px, 6vw, 56px);
@@ -886,9 +937,15 @@ table {
     font-size: clamp(17px, 2vw, 22px);
     line-height: 1.7;
   }
+  .featured-cta {
+    font-size: 16px;
+    margin-top: 8px;
+  }
   .featured-secondary {
     flex: 0.7 1 0%;
     border-top: none;
+    border-left: 1px solid var(--mg-border);
+    padding-left: 32px;
     padding-top: 0;
   }
   .secondary-title {
@@ -898,7 +955,7 @@ table {
 
 @media (min-width: 1024px) {
   .featured-section {
-    gap: 56px;
+    gap: 40px;
     padding-top: 40px;
     padding-bottom: 40px;
   }
@@ -908,6 +965,10 @@ table {
   .featured-excerpt {
     font-size: 26px;
     font-weight: 300;
+  }
+  .featured-cta {
+    font-size: 17px;
+    margin-top: 10px;
   }
   .secondary-title {
     font-size: 33px;
@@ -919,6 +980,9 @@ table {
   }
   .more-section {
     padding-top: 24px;
+  }
+  .featured-secondary {
+    padding-left: 40px;
   }
 }
 
@@ -966,7 +1030,7 @@ table {
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  color: var(--mg-body);
+  color: var(--mg-home-description);
 }
 
 .list-row-date {
@@ -983,21 +1047,24 @@ table {
   }
   .list-row {
     flex-direction: row;
-    align-items: baseline;
-    gap: 24px;
-    padding: 14px 0;
+    align-items: flex-start;
+    gap: 28px;
+    padding: 15px 0;
   }
   .list-row-title {
-    width: 220px;
+    width: 240px;
     flex-shrink: 0;
-    font-size: 19px;
+    font-size: 20px;
+    line-height: 23px;
   }
   .list-row-excerpt {
     flex: 1;
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding-top: 2px;
   }
   .list-row-date {
     flex-shrink: 0;
@@ -1011,15 +1078,18 @@ table {
     margin-bottom: 40px;
   }
   .list-row {
-    gap: 32px;
+    gap: 40px;
+    padding: 16px 0;
   }
   .list-row-title {
-    width: 280px;
-    font-size: 21px;
-    line-height: 24px;
+    width: 300px;
+    font-size: 22px;
+    line-height: 26px;
   }
   .list-row-excerpt {
-    font-size: 17px;
+    font-size: 15px;
+    line-height: 22px;
     font-weight: 300;
+    padding-top: 3px;
   }
 }
