@@ -127,3 +127,21 @@ export function formatDate(date: string, includeRelative = false) {
 
   return `${fullDate} (${formattedDate})`
 }
+
+export type NumberedPost = ReturnType<typeof getBlogPosts>[number] & {
+  number: number
+}
+
+// Posts sorted newest-first, each carrying a stable number
+// (chronological rank: oldest post = 1), so numbers never shift
+// as new posts are added.
+export function getNumberedPosts(): NumberedPost[] {
+  const byDateAsc = getBlogPosts().sort((a, b) => {
+    const dateA = a.metadata.publishedAt ? new Date(a.metadata.publishedAt).getTime() : 0
+    const dateB = b.metadata.publishedAt ? new Date(b.metadata.publishedAt).getTime() : 0
+    return dateA - dateB
+  })
+  return byDateAsc
+    .map((post, i) => ({ ...post, number: i + 1 }))
+    .reverse()
+}

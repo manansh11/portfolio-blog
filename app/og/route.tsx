@@ -2,16 +2,48 @@ import { ImageResponse } from 'next/og'
 
 export function GET(request: Request) {
   let url = new URL(request.url)
-  let title = url.searchParams.get('title') || 'Next.js Portfolio Starter'
+  let title = url.searchParams.get('title') || 'Manansh Shukla'
 
   return new ImageResponse(
     (
-      <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
-        <div tw="flex flex-col md:flex-row w-full py-12 px-4 md:items-center justify-between p-8">
-          <h2 tw="flex flex-col text-4xl font-bold tracking-tight text-left">
-            {title}
-          </h2>
-        </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          height: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#06060F',
+          backgroundImage:
+            'radial-gradient(circle at 50% -20%, rgba(124, 108, 255, 0.35), transparent 60%), radial-gradient(circle at 20% -10%, rgba(96, 165, 250, 0.2), transparent 55%)',
+          padding: '80px',
+        }}
+      >
+        <h2
+          style={{
+            fontSize: 64,
+            fontWeight: 300,
+            letterSpacing: '-0.03em',
+            lineHeight: 1.15,
+            textAlign: 'center',
+            color: '#F2F1F7',
+            margin: 0,
+          }}
+        >
+          {title}
+        </h2>
+        <p
+          style={{
+            marginTop: 40,
+            fontSize: 24,
+            fontWeight: 400,
+            letterSpacing: '0.2em',
+            color: '#8E8CA3',
+          }}
+        >
+          MANANSH SHUKLA
+        </p>
       </div>
     ),
     {

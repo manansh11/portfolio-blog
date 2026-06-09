@@ -1,5 +1,5 @@
 import { CustomMDX } from 'app/components/mdx'
-import { formatDate, getReadingTime, getBlogPosts } from 'app/blog/utils'
+import { getReadingTime, getBlogPosts, getNumberedPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
 import { SpeedReader } from 'app/components/speed-reader'
 import { ReadingProgress } from 'app/components/reading-progress'
@@ -42,19 +42,36 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   }
 }
 
+function formatMetaDate(date?: string) {
+  if (!date) return ''
+  const d = new Date(date.includes('T') ? date : `${date}T00:00:00`)
+  return d
+    .toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    })
+    .toUpperCase()
+}
+
 export default function Blog({ params }: { params: { slug: string } }) {
-  const post = getBlogPosts().find((p) => p.slug === params.slug)
+  const posts = getNumberedPosts()
+  const postIndex = posts.findIndex((p) => p.slug === params.slug)
+  const post = posts[postIndex]
 
   if (!post) {
     return (
       <section>
-        <h1 className="post-title">Post not found</h1>
+        <h1 className="post-title text-light-gradient">Post not found</h1>
       </section>
     )
   }
 
+  // posts are newest-first; "next" continues down the index (older)
+  const nextPost = posts[postIndex + 1]
+
   return (
-    <section className="blog-post-container">
+    <section>
       <ReadingProgress />
       <script
         type="application/ld+json"
@@ -76,32 +93,34 @@ export default function Blog({ params }: { params: { slug: string } }) {
         }}
       />
 
-      <div className="post-back-link">
-        <Link href="/blog" className="back-link">
-          ← Back to all writing
-        </Link>
-      </div>
-
       <div className="post-header">
-        <h1 className="title post-title">{post.metadata.title}</h1>
-        <p className="post-date">
-          {formatDate(post.metadata.publishedAt || '')}
-          <span className="post-reading-time"> · {getReadingTime(post.content)}</span>
-        </p>
-      </div>
-
-      <div style={{ marginBottom: '32px' }}>
-        <SpeedReader content={post.content} />
+        <p className="post-number text-accent-gradient">No. {post.number}</p>
+        <h1 className="title post-title text-light-gradient">
+          {post.metadata.title}
+        </h1>
+        <div className="post-meta">
+          <span>{formatMetaDate(post.metadata.publishedAt)}</span>
+          <span>·</span>
+          <span>{getReadingTime(post.content)}</span>
+        </div>
+        <div className="post-tools">
+          <SpeedReader content={post.content} />
+        </div>
       </div>
 
       <article className="prose post-body">
         <CustomMDX source={post.content} />
       </article>
 
-      <div className="post-back-link post-back-bottom">
-        <Link href="/blog" className="back-link">
-          ← Back to all writing
+      <div className="post-footer">
+        <Link href="/" className="post-footer-link">
+          ← Index
         </Link>
+        {nextPost && (
+          <Link href={`/blog/${nextPost.slug}`} className="post-footer-link">
+            Next · {nextPost.metadata.title} →
+          </Link>
+        )}
       </div>
     </section>
   )

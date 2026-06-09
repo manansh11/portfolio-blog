@@ -40,16 +40,17 @@ npm run start        # Start production server
 
 ### Key Components
 - **MDX Blog System**: Posts are stored as `.mdx` files in `app/blog/posts/`
-- **Post Utilities**: `lib/posts.ts` handles post fetching, sorting, and metadata
-- **Theme**: Dark blue color scheme with CSS variables defined in `app/globals.css`
-- **Navigation**: Sticky header with Home/Blog links
+- **Post Utilities**: `app/blog/utils.ts` handles post fetching, numbering (`getNumberedPosts`), and metadata
+- **Homepage = Index**: the homepage is the full numbered post index; `/blog` permanently redirects to `/` (next.config.mjs), `/blog/[slug]` serves posts
+- **Header**: client component; centered masthead on `/`, compact row elsewhere
 
-### Styling Guidelines
-The site uses a custom dark theme with:
-- Background: Oxford Blue (#10131a)
-- Headings: Jordy Blue (#88b3f0)
-- Text: Light gray/white variants
-- Links: Hover effects with underline decoration
+### Styling Guidelines ("ethereal" design — see docs/plans/2026-06-09-ethereal-redesign-design.md)
+Dark only, no theme toggle. Tokens in `app/global.css`:
+- Background: deep space `#06060F` with fixed aurora orbs (blurred radial gradients, slow drift)
+- Type: Inter via next/font, light weights; titles use white→violet gradient text (`.text-light-gradient`)
+- Accent: violet `#A78BFA` / blue `#7DABF8`; labels use `.text-accent-gradient`
+- Interaction rule: hover states glow (text-shadow halos), nothing inverts or moves
+- Signature: breathing dot (10s cycle) as divider and as `hr` in prose; respect prefers-reduced-motion
 
 ### Content Guidelines
 Blog posts focus on:

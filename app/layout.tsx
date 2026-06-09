@@ -1,11 +1,17 @@
 import './global.css'
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Header } from './components/header'
 import { Footer } from './components/footer'
-import { ThemeProvider } from './components/theme-provider'
 import { baseUrl } from './sitemap'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -41,42 +47,21 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap"
-          rel="stylesheet"
-        />
-        {/* Inline script to prevent flash of wrong theme */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var theme = localStorage.getItem('mg-theme');
-                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                  }
-                } catch(e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
+    <html lang="en" className={inter.variable}>
       <body className="antialiased">
-        <ThemeProvider>
-          <div
-            className="mx-auto flex flex-col min-h-screen site-container"
-          >
-            <Header />
-            <main className="flex-1">
-              {children}
-            </main>
-            <Footer />
+        <div className="aurora" aria-hidden="true">
+          <div className="orb orb-1" />
+          <div className="orb orb-2" />
+          <div className="orb orb-3" />
+        </div>
+        <div className="site-container flex flex-col min-h-screen">
+          <Header />
+          <main className="flex-1">{children}</main>
+          <div className="breath-divider" aria-hidden="true">
+            <span className="breath-dot" />
           </div>
-        </ThemeProvider>
+          <Footer />
+        </div>
         <Analytics />
         <SpeedInsights />
       </body>

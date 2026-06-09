@@ -1,15 +1,19 @@
 const socialLinks = [
-  { name: 'X', href: 'https://twitter.com/manansh_shukla' },
+  { name: 'GitHub', href: 'https://github.com/manansh11' },
+  { name: 'Twitter', href: 'https://twitter.com/manansh_shukla' },
   { name: 'Substack', href: 'https://manansh.substack.com' },
-  { name: 'LinkedIn', href: 'https://linkedin.com/in/mananshshukla' },
+  { name: 'OpenUX', href: 'https://www.openux.xyz' },
 ]
+
+const nowLine =
+  'building agentic ux research tools, learning to relax all day'
 
 export function Footer() {
   return (
     <footer className="site-footer">
-      <span className="footer-copy">
-        © {new Date().getFullYear()} Manansh Shukla
-      </span>
+      <p className="now-line">
+        <span className="now-key text-accent-gradient">now</span> — {nowLine}
+      </p>
 
       <div className="footer-social">
         {socialLinks.map((link) => (
@@ -24,6 +28,10 @@ export function Footer() {
           </a>
         ))}
       </div>
+
+      <p className="footer-copy">
+        © {new Date().getFullYear()} · made with wonder
+      </p>
     </footer>
   )
 }

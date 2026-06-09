@@ -1,10 +1,15 @@
+import Link from 'next/link'
+
 export default function NotFound() {
   return (
-    <section>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        404 - Page Not Found
-      </h1>
-      <p className="mb-4">The page you are looking for does not exist.</p>
+    <section className="post-header">
+      <p className="post-number text-accent-gradient">404</p>
+      <h1 className="post-title text-light-gradient">Nothing here</h1>
+      <div className="post-meta" style={{ textTransform: 'none', letterSpacing: 0 }}>
+        <Link href="/" className="post-footer-link">
+          ← Back to the index
+        </Link>
+      </div>
     </section>
   )
 }

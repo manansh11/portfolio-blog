@@ -19,39 +19,39 @@ const elsewhereLinks = [
 export default function AboutPage() {
   return (
     <section className="about-layout">
-      <div className="about-bio">
-        <p className="about-body">
-          I co-founded{' '}
-          <a
-            href="https://www.openux.xyz"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="about-link"
-          >
-            OpenUX
-          </a>
-          , where I currently conduct UX research with leading crypto companies
-          and protocols.
-        </p>
-      </div>
+      <p className="about-body">
+        I co-founded{' '}
+        <a
+          href="https://www.openux.xyz"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="about-link"
+        >
+          OpenUX
+        </a>
+        , where I currently conduct UX research with leading crypto companies
+        and protocols.
+      </p>
 
-      <div className="about-sidebar">
-        <div className="sidebar-section">
-          <span className="sidebar-label">Now</span>
+      <div className="about-sections">
+        <div>
+          <span className="about-label text-accent-gradient">Now</span>
           {nowItems.map((item) => (
-            <p key={item} className="sidebar-item">{item}</p>
+            <p key={item} className="about-item">
+              {item}
+            </p>
           ))}
         </div>
 
-        <div className="sidebar-section">
-          <span className="sidebar-label">Elsewhere</span>
+        <div>
+          <span className="about-label text-accent-gradient">Elsewhere</span>
           {elsewhereLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="sidebar-item sidebar-link"
+              className="about-item"
             >
               {link.name}
             </a>
