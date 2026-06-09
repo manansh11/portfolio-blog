@@ -293,24 +293,9 @@ body {
   text-align: center;
 }
 
-.now-line {
-  font-size: 15.5px;
-  font-weight: 320;
-  font-style: italic;
-  line-height: 1.8;
-  color: var(--dim);
-  max-width: 440px;
-  margin: 0 auto;
-}
-
-.now-key {
-  font-style: normal;
-}
-
 .footer-social {
   display: flex;
   gap: 28px;
-  margin-top: 34px;
   justify-content: center;
 }
 

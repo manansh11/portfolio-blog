@@ -3,13 +3,6 @@ export const metadata = {
   description: 'I am interested in aliveness.',
 }
 
-const nowItems = [
-  'Building OpenUX',
-  'UX Research at MetaMask',
-  'UX Research at Ondo Finance',
-  'Living in Calgary',
-]
-
 const elsewhereLinks = [
   { name: 'GitHub', href: 'https://github.com/manansh11' },
   { name: 'LinkedIn', href: 'https://linkedin.com/in/mananshshukla' },
@@ -34,15 +27,6 @@ export default function AboutPage() {
       </p>
 
       <div className="about-sections">
-        <div>
-          <span className="about-label text-accent-gradient">Now</span>
-          {nowItems.map((item) => (
-            <p key={item} className="about-item">
-              {item}
-            </p>
-          ))}
-        </div>
-
         <div>
           <span className="about-label text-accent-gradient">Elsewhere</span>
           {elsewhereLinks.map((link) => (

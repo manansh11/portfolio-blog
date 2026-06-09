@@ -5,16 +5,9 @@ const socialLinks = [
   { name: 'OpenUX', href: 'https://www.openux.xyz' },
 ]
 
-const nowLine =
-  'building agentic ux research tools, learning to relax all day'
-
 export function Footer() {
   return (
     <footer className="site-footer">
-      <p className="now-line">
-        <span className="now-key text-accent-gradient">now</span> — {nowLine}
-      </p>
-
       <div className="footer-social">
         {socialLinks.map((link) => (
           <a
@@ -29,9 +22,7 @@ export function Footer() {
         ))}
       </div>
 
-      <p className="footer-copy">
-        © {new Date().getFullYear()} · made with wonder
-      </p>
+      <p className="footer-copy">© {new Date().getFullYear()} Manansh Shukla</p>
     </footer>
   )
 }
