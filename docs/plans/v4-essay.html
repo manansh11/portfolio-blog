@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>29 · Enjoyment creates value</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06060F;
+    --fg: #F2F1F7;
+    --dim: #8E8CA3;
+    --faint: #55536B;
+    --line: rgba(255,255,255,0.07);
+    --violet: #A78BFA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: rgba(167,139,250,0.85); color: #0B0817; }
+  html { background: var(--bg); }
+  body {
+    font-family: "Inter", -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 72px 24px 100px;
+    overflow-x: hidden;
+    letter-spacing: -0.011em;
+  }
+  .aurora { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(90px); }
+  .orb-1 {
+    width: 520px; height: 520px;
+    top: -240px; left: 50%; margin-left: -260px;
+    background: radial-gradient(circle, rgba(124,108,255,0.16), transparent 65%);
+    animation: drift1 36s ease-in-out infinite;
+  }
+  .orb-2 {
+    width: 400px; height: 400px;
+    top: -160px; left: 16%;
+    background: radial-gradient(circle, rgba(96,165,250,0.10), transparent 65%);
+    animation: drift2 44s ease-in-out infinite;
+  }
+  @keyframes drift1 { 50% { transform: translate(40px, 30px) scale(1.08); } }
+  @keyframes drift2 { 50% { transform: translate(60px, -20px) scale(0.94); } }
+
+  .page { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .home {
+    font-size: 19px;
+    font-weight: 250;
+    letter-spacing: -0.03em;
+    background: linear-gradient(180deg, #FFFFFF 30%, #B9B4D8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-decoration: none;
+    transition: filter 0.4s ease;
+  }
+  .home:hover { filter: drop-shadow(0 0 14px rgba(167,139,250,0.6)); }
+  nav { display: flex; gap: 26px; }
+  nav a {
+    font-size: 12.5px;
+    font-weight: 450;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+    text-decoration: none;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+  }
+  nav a:hover { color: #fff; text-shadow: 0 0 16px rgba(167,139,250,0.8); }
+
+  /* essay */
+  .essay-head { margin-top: 96px; text-align: center; }
+  .essay-script {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: linear-gradient(100deg, #C4B5FD, #93C5FD);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: clamp(32px, 7vw, 46px);
+    font-weight: 250;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    background: linear-gradient(180deg, #FFFFFF 30%, #B9B4D8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .meta-line {
+    margin-top: 18px;
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    color: var(--faint);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+  }
+
+  article { margin-top: 64px; }
+  .prose {
+    font-size: 17.5px;
+    font-weight: 320;
+    line-height: 1.85;
+    letter-spacing: -0.008em;
+    color: #DDDBE8;
+  }
+  .prose p { margin: 1.5em 0; }
+  .prose p:first-child { margin-top: 0; }
+  .prose strong { font-weight: 550; color: #FFFFFF; }
+  .prose em { font-style: italic; }
+  .prose a {
+    color: var(--violet);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(167,139,250,0.4);
+    transition: text-shadow 0.3s ease;
+  }
+  .prose a:hover { text-shadow: 0 0 14px rgba(167,139,250,0.7); }
+  .prose h3 {
+    font-size: 13px;
+    font-weight: 550;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: linear-gradient(100deg, #C4B5FD, #93C5FD);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 3em 0 1.2em;
+  }
+  .prose blockquote {
+    font-size: 22px;
+    font-weight: 250;
+    font-style: italic;
+    letter-spacing: -0.015em;
+    line-height: 1.6;
+    text-align: center;
+    background: linear-gradient(100deg, #C4B5FD, #93C5FD, #F5D0FE);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 20px rgba(167,139,250,0.2));
+    padding: 0 1em;
+    margin: 2em 0;
+  }
+  .dinkus { text-align: center; margin: 3em 0; }
+  .dinkus span {
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--violet);
+    box-shadow: 0 0 14px rgba(167,139,250,0.8);
+    animation: pulse 10s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(0.7); opacity: 0.5; }
+    45%, 55% { transform: scale(1.2); opacity: 1; }
+  }
+
+  .essay-foot {
+    margin-top: 96px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .essay-foot a {
+    font-size: 12.5px;
+    font-weight: 450;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+    text-decoration: none;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+  }
+  .essay-foot a:hover { color: #fff; text-shadow: 0 0 16px rgba(167,139,250,0.8); }
+</style>
+</head>
+<body>
+<div class="aurora">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+</div>
+<div class="page">
+
+  <header class="masthead">
+    <a class="home" href="v4-index.html">Manansh Shukla</a>
+    <nav>
+      <a href="v4-index.html">Index</a>
+      <a href="#">About</a>
+      <a href="#">RSS</a>
+    </nav>
+  </header>
+
+  <div class="essay-head">
+    <div class="essay-script">No. 29</div>
+    <h1>Enjoyment creates value</h1>
+    <div class="meta-line"><span>AUG 11, 2025</span><span>·</span><span>3 MIN</span></div>
+  </div>
+
+  <article>
+    <div class="prose">
+      <p>Value is contextual. My Macbook laptop has a lot of value to me while working.</p>
+      <p>But has very little value when I want to enjoy time in nature.</p>
+      <p>Where, when, what I am doing, who I am doing it with, all seem to matter a lot.</p>
+
+      <h3>Some ideas on creating value</h3>
+
+      <p>Take what is unenjoyable and go through the process of making it enjoyable.</p>
+      <p>The process of making an unenjoyable thing an enjoyable one is the process of creating value.</p>
+      <p>Your job is to transform context. <strong>What matters is the shift in context.</strong></p>
+
+      <div class="dinkus"><span></span></div>
+
+      <p>Where the old context is lost and a new one is created. An enjoyable one! A valuable one.</p>
+      <blockquote>“The process of making an unenjoyable thing enjoyable is the process of creating value.”</blockquote>
+    </div>
+  </article>
+
+  <div class="essay-foot">
+    <a href="v4-index.html">&larr; Index</a>
+    <a href="#">Next · The Heart Lens &rarr;</a>
+  </div>
+
+</div>
+</body>
+</html>

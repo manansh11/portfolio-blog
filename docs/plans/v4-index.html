@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>manansh shukla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06060F;
+    --fg: #F2F1F7;
+    --dim: #8E8CA3;
+    --faint: #55536B;
+    --line: rgba(255,255,255,0.07);
+    --violet: #A78BFA;
+    --blue: #7DABF8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  ::selection { background: rgba(167,139,250,0.85); color: #0B0817; }
+  html { background: var(--bg); }
+  body {
+    font-family: "Inter", -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 96px 24px 100px;
+    overflow-x: hidden;
+    letter-spacing: -0.011em;
+  }
+  /* aurora — soft drifting light */
+  .aurora {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+  }
+  .orb-1 {
+    width: 520px; height: 520px;
+    top: -220px; left: 50%;
+    margin-left: -260px;
+    background: radial-gradient(circle, rgba(124,108,255,0.20), transparent 65%);
+    animation: drift1 36s ease-in-out infinite;
+  }
+  .orb-2 {
+    width: 420px; height: 420px;
+    top: -140px; left: 18%;
+    background: radial-gradient(circle, rgba(96,165,250,0.13), transparent 65%);
+    animation: drift2 44s ease-in-out infinite;
+  }
+  .orb-3 {
+    width: 380px; height: 380px;
+    top: -100px; right: 12%;
+    background: radial-gradient(circle, rgba(244,182,255,0.09), transparent 65%);
+    animation: drift3 52s ease-in-out infinite;
+  }
+  @keyframes drift1 { 50% { transform: translate(40px, 30px) scale(1.08); } }
+  @keyframes drift2 { 50% { transform: translate(60px, -20px) scale(0.94); } }
+  @keyframes drift3 { 50% { transform: translate(-50px, 25px) scale(1.06); } }
+
+  .page { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* masthead */
+  .masthead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .site-title {
+    font-size: clamp(34px, 7vw, 46px);
+    font-weight: 250;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    background: linear-gradient(180deg, #FFFFFF 30%, #B9B4D8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  nav {
+    display: flex;
+    gap: 32px;
+    margin-top: 36px;
+  }
+  nav a {
+    font-size: 13px;
+    font-weight: 450;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+    text-decoration: none;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+  }
+  nav a:hover, nav a.active {
+    color: #fff;
+    text-shadow: 0 0 16px rgba(167,139,250,0.8);
+  }
+
+  /* index */
+  .index { margin-top: 84px; }
+  .index-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    color: var(--faint);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+  }
+  .index a.row {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding: 13px 14px;
+    margin: 0 -14px;
+    border-radius: 12px;
+    text-decoration: none;
+    border-top: 1px solid var(--line);
+    transition: background 0.35s ease;
+  }
+  .index a.row:hover { background: rgba(167,139,250,0.07); }
+  .index a.row:hover .title {
+    color: #fff;
+    text-shadow: 0 0 18px rgba(167,139,250,0.55);
+  }
+  .row .num {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .row .title {
+    font-size: 16.5px;
+    font-weight: 380;
+    letter-spacing: -0.013em;
+    color: var(--fg);
+    line-height: 1.45;
+    flex: 1;
+    transition: color 0.35s ease, text-shadow 0.35s ease;
+  }
+  .row .date {
+    font-size: 11px;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  .dinkus {
+    text-align: center;
+    margin: 64px 0;
+  }
+  .dinkus span {
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--violet);
+    box-shadow: 0 0 14px rgba(167,139,250,0.8);
+    animation: pulse 10s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(0.7); opacity: 0.5; }
+    45%, 55% { transform: scale(1.2); opacity: 1; }
+  }
+
+  footer { text-align: center; }
+  .nowline {
+    font-size: 15.5px;
+    font-weight: 320;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--dim);
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .nowline .key {
+    font-style: normal;
+    background: linear-gradient(100deg, #C4B5FD, #93C5FD);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    margin-top: 34px;
+    justify-content: center;
+  }
+  .footer-links a {
+    font-size: 12.5px;
+    font-weight: 450;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+    text-decoration: none;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+  }
+  .footer-links a:hover {
+    color: #fff;
+    text-shadow: 0 0 16px rgba(167,139,250,0.8);
+  }
+  .copy {
+    margin-top: 34px;
+    font-size: 11.5px;
+    font-weight: 300;
+    color: var(--faint);
+  }
+
+  @media (max-width: 540px) {
+    .row .date { display: none; }
+    body { padding-top: 56px; }
+  }
+</style>
+</head>
+<body>
+<div class="aurora">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+<div class="page">
+
+  <header class="masthead">
+    <h1 class="site-title">Manansh Shukla</h1>
+    <nav>
+      <a class="active" href="#">Index</a>
+      <a href="#">About</a>
+      <a href="#">RSS</a>
+    </nav>
+  </header>
+
+  <section class="index">
+    <div class="index-header"><span>INDEX</span><span>29 PIECES</span></div>
+    <a class="row" href="v4-essay.html"><span class="num">29</span><span class="title">Enjoyment creates value</span><span class="date">2025-08-11</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">28</span><span class="title">The Heart Lens</span><span class="date">2025-06-23</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">27</span><span class="title">Healing is magic</span><span class="date">2025-06-19</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">26</span><span class="title">How to be present</span><span class="date">2025-06-18</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">25</span><span class="title">How to temporarily stop all desires</span><span class="date">2025-06-16</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">24</span><span class="title">The Hidden Cost of Doing Things for a Reason</span><span class="date">2025-05-24</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">23</span><span class="title">Give and Recieve</span><span class="date">2025-05-03</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">22</span><span class="title">Embodied cognition (Use your body to think)</span><span class="date">2025-04-23</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">21</span><span class="title">How to manifest</span><span class="date">2025-03-04</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">20</span><span class="title">Excessive scrolling works because of emotional avoidance</span><span class="date">2024-12-07</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">19</span><span class="title">Overcoming internal blocks</span><span class="date">2024-11-25</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">18</span><span class="title">Love all the parts</span><span class="date">2024-10-05</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">17</span><span class="title">Expertise is measured by the quality of your questions</span><span class="date">2024-07-22</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">16</span><span class="title">All statements are equally true (How to control your mind)</span><span class="date">2024-06-01</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">15</span><span class="title">Your heart is a vehicle</span><span class="date">2024-05-30</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">14</span><span class="title">How to build great product experiences with AI</span><span class="date">2024-05-14</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">13</span><span class="title">Relax all day (and still get stuff done)</span><span class="date">2024-03-28</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">12</span><span class="title">R.A.I.N (Recognize, Accept, Investigate, Nurture)</span><span class="date">2024-03-03</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">11</span><span class="title">Stop writing about your problems</span><span class="date">2023-09-01</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">10</span><span class="title">Spiritual Significance</span><span class="date">2023-06-08</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">9</span><span class="title">Gratitude</span><span class="date">2023-04-24</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">8</span><span class="title">The Hallway (How to access your subconscious)</span><span class="date">2023-03-22</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">7</span><span class="title">Own your wants</span><span class="date">2023-02-26</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">6</span><span class="title">Forgiveness (How to purify your mind for good)</span><span class="date">2023-02-15</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">5</span><span class="title">What does this want to integrate into?</span><span class="date">2023-01-20</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">4</span><span class="title">What now? (The only spiritual practice you need)</span><span class="date">2022-08-06</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">3</span><span class="title">Relaxation is the ultimate sadhana</span><span class="date">2022-06-02</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">2</span><span class="title">Coherent Relaxing (Regulate your nervous system)</span><span class="date">2022-04-06</span></a>
+    <a class="row" href="v4-essay.html"><span class="num">1</span><span class="title">How to create</span><span class="date">2022-03-06</span></a>
+  </section>
+
+  <div class="dinkus"><span></span></div>
+
+  <footer>
+    <div class="nowline"><span class="key">now</span> — building agentic ux research tools, learning to relax all day</div>
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+      <a href="#">Substack</a>
+      <a href="#">OpenUX</a>
+    </div>
+    <div class="copy">© 2026 · made with wonder</div>
+  </footer>
+
+</div>
+</body>
+</html>
