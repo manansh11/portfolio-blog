@@ -4,8 +4,6 @@ export const metadata = {
 }
 
 const elsewhereLinks = [
-  { name: 'GitHub', href: 'https://github.com/manansh11' },
-  { name: 'LinkedIn', href: 'https://linkedin.com/in/mananshshukla' },
   { name: 'Twitter', href: 'https://twitter.com/manansh_shukla' },
 ]
 
