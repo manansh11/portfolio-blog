@@ -1,5 +1,5 @@
 const socialLinks = [
-  { name: 'Twitter', href: 'https://twitter.com/manansh_shukla' },
+  { name: 'X', href: 'https://x.com/mananshux' },
   { name: 'Substack', href: 'https://manansh.substack.com' },
   { name: 'OpenUX', href: 'https://www.openux.xyz' },
 ]

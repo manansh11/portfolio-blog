@@ -4,7 +4,7 @@ export const metadata = {
 }
 
 const elsewhereLinks = [
-  { name: 'Twitter', href: 'https://twitter.com/manansh_shukla' },
+  { name: 'X', href: 'https://x.com/mananshux' },
 ]
 
 export default function AboutPage() {
