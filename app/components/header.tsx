@@ -32,6 +32,18 @@ function Nav({ pathname }: { pathname: string }) {
 
 export function Header() {
   const pathname = usePathname()
+  const isFullMasthead = pathname === '/' || pathname === '/about'
+
+  if (isFullMasthead) {
+    return (
+      <header className="masthead-home">
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <h1 className="site-name text-light-gradient">Manansh Shukla</h1>
+        </Link>
+        <Nav pathname={pathname} />
+      </header>
+    )
+  }
 
   return (
     <header className="masthead-compact">
