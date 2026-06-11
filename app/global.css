@@ -162,31 +162,6 @@ body {
   filter: drop-shadow(0 0 14px rgba(167, 139, 250, 0.6));
 }
 
-.site-nav {
-  display: flex;
-  gap: 26px;
-}
-
-.masthead-home .site-nav {
-  margin-top: 36px;
-  gap: 32px;
-}
-
-.nav-link {
-  font-size: 13px;
-  font-weight: 450;
-  letter-spacing: 0.04em;
-  color: var(--dim);
-  text-decoration: none;
-  transition: color 0.4s ease, text-shadow 0.4s ease;
-}
-
-.nav-link:hover,
-.nav-link[data-active] {
-  color: #fff;
-  text-shadow: 0 0 16px var(--glow-strong);
-}
-
 /* ─── Index (homepage) ─── */
 
 .index-section {
@@ -591,68 +566,6 @@ body {
 
 .title {
   text-wrap: balance;
-}
-
-/* ─── About ─── */
-
-.about-layout {
-  margin-top: 72px;
-  text-align: center;
-}
-
-.about-body {
-  font-size: 19px;
-  font-weight: 320;
-  line-height: 1.85;
-  color: var(--prose);
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.about-link {
-  color: var(--violet);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.4);
-  transition: text-shadow 0.3s ease;
-}
-
-.about-link:hover {
-  text-shadow: 0 0 14px rgba(167, 139, 250, 0.7);
-}
-
-.about-sections {
-  margin-top: 64px;
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-
-.about-label {
-  display: block;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-
-.about-item {
-  font-size: 15.5px;
-  font-weight: 320;
-  line-height: 2;
-  color: var(--dim);
-  margin: 0;
-}
-
-a.about-item {
-  display: block;
-  text-decoration: none;
-  transition: color 0.4s ease, text-shadow 0.4s ease;
-}
-
-a.about-item:hover {
-  color: #fff;
-  text-shadow: 0 0 16px var(--glow-strong);
 }
 
 /* ─── Speed Reader ─── */
