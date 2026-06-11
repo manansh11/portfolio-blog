@@ -32,16 +32,6 @@ function Nav({ pathname }: { pathname: string }) {
 
 export function Header() {
   const pathname = usePathname()
-  const isHome = pathname === '/'
-
-  if (isHome) {
-    return (
-      <header className="masthead-home">
-        <h1 className="site-name text-light-gradient">Manansh Shukla</h1>
-        <Nav pathname={pathname} />
-      </header>
-    )
-  }
 
   return (
     <header className="masthead-compact">
