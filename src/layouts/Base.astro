@@ -16,7 +16,9 @@ const TAGLINE = "I'm interested in what it feels like to be alive."
 const { title, description, type = 'website', publishedTime } = Astro.props
 const fullTitle = title ? `${title} | ${SITE}` : SITE
 const metaDescription = description || (title ? undefined : TAGLINE)
-const url = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '')
+// pages build to .html files but are served without the extension
+const path = Astro.url.pathname.replace(/(index)?\.html$/, '')
+const url = new URL(path, Astro.site).href.replace(/\/$/, '')
 const ogImage = new URL('/og.png', Astro.site).href
 ---
 
@@ -70,11 +72,10 @@ const ogImage = new URL('/og.png', Astro.site).href
       </div>
       <Footer />
     </div>
+    <!-- Speed Insights. Web Analytics isn't enabled on the Vercel project, so its script would 404 -->
     <script is:inline>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) }
       window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) }
     </script>
-    <script is:inline defer src="/_vercel/insights/script.js"></script>
     <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
   </body>
 </html>

@@ -27,7 +27,7 @@ No test framework is configured.
 ### Directory Structure
 - `app/blog/posts/` - post files (path kept from the Next.js era)
 - `src/pages/` - `index.astro` (numbered index), `blog/[slug].astro`, `404.astro`, `rss.xml.ts`, `sitemap.xml.ts`, `robots.txt.ts`
-- `src/layouts/Base.astro` - head/meta, aurora orbs, footer, Vercel analytics scripts
+- `src/layouts/Base.astro` - head/meta, aurora orbs, footer, Vercel Speed Insights script
 - `src/components/` - `Header.astro`, `Footer.astro`
 - `src/lib/posts.ts` - `getNumberedPosts` (oldest = 1, ties by slug), reading time, date format
 - `src/scripts/speed-reader.ts` - vanilla speed reader, imported only on first use
