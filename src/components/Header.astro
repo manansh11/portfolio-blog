@@ -1,0 +1,17 @@
+---
+const { home = false } = Astro.props
+---
+
+{
+  home ? (
+    <header class="masthead-home">
+      <h1 class="site-name text-light-gradient">Manansh Shukla</h1>
+    </header>
+  ) : (
+    <header class="masthead-compact">
+      <a href="/" style="text-decoration: none">
+        <span class="site-name text-light-gradient">Manansh Shukla</span>
+      </a>
+    </header>
+  )
+}

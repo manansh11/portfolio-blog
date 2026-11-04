@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro'
+import Header from '../components/Header.astro'
+import { getNumberedPosts } from '../lib/posts'
+
+const posts = await getNumberedPosts()
+---
+
+<Base>
+  <Header slot="header" home />
+  <section class="index-section">
+    <div class="index-header">
+      <span>INDEX</span>
+      <span>{posts.length} PIECES</span>
+    </div>
+
+    {
+      posts.map((post) => (
+        <a href={`/blog/${post.id}`} class="index-row">
+          <span class="index-row-num">{post.number}</span>
+          <span class="index-row-title">{post.data.title}</span>
+          <span class="index-row-date">{post.data.date}</span>
+        </a>
+      ))
+    }
+  </section>
+</Base>

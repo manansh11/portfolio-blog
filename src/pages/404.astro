@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro'
+import Header from '../components/Header.astro'
+---
+
+<Base title="Nothing here">
+  <Header slot="header" />
+  <section class="post-header">
+    <p class="post-number text-accent-gradient">404</p>
+    <h1 class="post-title text-light-gradient">Nothing here</h1>
+    <div class="post-meta" style="text-transform: none; letter-spacing: 0">
+      <a href="/" class="post-footer-link">← Back to the index</a>
+    </div>
+  </section>
+</Base>

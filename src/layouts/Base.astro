@@ -1,0 +1,80 @@
+---
+import '../styles/fonts.css'
+import '../styles/global.css'
+import Footer from '../components/Footer.astro'
+
+interface Props {
+  title?: string
+  description?: string
+  type?: 'website' | 'article'
+  publishedTime?: string
+}
+
+const SITE = 'Manansh Shukla'
+const TAGLINE = "I'm interested in what it feels like to be alive."
+
+const { title, description, type = 'website', publishedTime } = Astro.props
+const fullTitle = title ? `${title} | ${SITE}` : SITE
+const metaDescription = description || (title ? undefined : TAGLINE)
+const url = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '')
+const ogImage = new URL('/og.png', Astro.site).href
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {metaDescription && <meta name="description" content={metaDescription} />}
+    <link rel="canonical" href={url} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE} href="/rss.xml" />
+    <link
+      rel="preload"
+      href="/fonts/e4af272ccee01ff0-s.p.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="googlebot"
+      content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    />
+    <meta property="og:title" content={title || SITE} />
+    {metaDescription && <meta property="og:description" content={metaDescription} />}
+    <meta property="og:url" content={url} />
+    <meta property="og:site_name" content={SITE} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content={type} />
+    <meta property="og:image" content={ogImage} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title || SITE} />
+    {metaDescription && <meta name="twitter:description" content={metaDescription} />}
+    <meta name="twitter:image" content={ogImage} />
+    <slot name="head" />
+  </head>
+  <body class="antialiased">
+    <div class="aurora" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="site-container flex flex-col min-h-screen">
+      <slot name="header" />
+      <main class="flex-1"><slot /></main>
+      <div class="breath-divider" aria-hidden="true">
+        <span class="breath-dot"></span>
+      </div>
+      <Footer />
+    </div>
+    <script is:inline>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) }
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments) }
+    </script>
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
+    <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
+  </body>
+</html>

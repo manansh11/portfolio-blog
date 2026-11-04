@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal portfolio and blog website built with Next.js App Router, TypeScript, and Tailwind CSS. The site features a blog with MDX support for rich content authoring.
+This is a personal blog built with Astro as a fully static site (no client JS except the lazy-loaded speed reader). Posts are MDX files in `app/blog/posts/`.
 
 ## Essential Commands
 

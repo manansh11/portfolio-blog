@@ -1,0 +1,21 @@
+---
+const socialLinks = [
+  { name: 'X', href: 'https://x.com/mananshux' },
+  { name: 'Substack', href: 'https://manansh.substack.com' },
+  { name: 'OpenUX', href: 'https://www.openux.xyz' },
+]
+---
+
+<footer class="site-footer">
+  <div class="footer-social">
+    {
+      socialLinks.map((link) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="footer-link">
+          {link.name}
+        </a>
+      ))
+    }
+  </div>
+
+  <p class="footer-copy">© {new Date().getFullYear()} Manansh Shukla</p>
+</footer>

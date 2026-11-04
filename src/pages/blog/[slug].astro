@@ -1,0 +1,89 @@
+---
+import { render } from 'astro:content'
+import Base from '../../layouts/Base.astro'
+import Header from '../../components/Header.astro'
+import { getNumberedPosts, getReadingTime, formatMetaDate } from '../../lib/posts'
+
+export async function getStaticPaths() {
+  const posts = await getNumberedPosts()
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    // posts are newest-first; "next" continues down the index (older)
+    props: { post, nextPost: posts[i + 1] },
+  }))
+}
+
+const { post, nextPost } = Astro.props
+const { Content } = await render(post)
+const { title, date, description } = post.data
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  datePublished: date || '',
+  dateModified: date || '',
+  description: description || '',
+  image: new URL('/og.png', Astro.site).href,
+  url: new URL(`/blog/${post.id}`, Astro.site).href,
+  author: { '@type': 'Person', name: 'Manansh Shukla' },
+}
+---
+
+<Base title={title} description={description} type="article" publishedTime={date}>
+  <Header slot="header" />
+  <section>
+    <div class="reading-progress-bar" aria-hidden="true">
+      <div class="reading-progress-fill"></div>
+    </div>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+    <div class="post-header">
+      <p class="post-number text-accent-gradient">No. {post.number}</p>
+      <h1 class="title post-title text-light-gradient">{title}</h1>
+      <div class="post-meta">
+        <span>{formatMetaDate(date)}</span>
+        <span>·</span>
+        <span>{getReadingTime(post.body || '')}</span>
+      </div>
+      <div class="post-tools">
+        <button type="button" class="speed-reader-trigger" data-speed-reader>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 6px">
+            <path
+              d="M1 3h14M1 6.5h10M1 10h12M1 13.5h8"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"></path>
+          </svg>
+          Speed read
+        </button>
+      </div>
+    </div>
+
+    <article class="prose post-body">
+      <Content />
+    </article>
+
+    <div class="post-footer">
+      <a href="/" class="post-footer-link">← Index</a>
+      {
+        nextPost && (
+          <a href={`/blog/${nextPost.id}`} class="post-footer-link">
+            Next · {nextPost.data.title} →
+          </a>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<script>
+  // The speed reader is only downloaded when someone reaches for it
+  const trigger = document.querySelector<HTMLButtonElement>('[data-speed-reader]')
+  const load = () => import('../../scripts/speed-reader')
+  trigger?.addEventListener('pointerenter', load, { once: true })
+  trigger?.addEventListener('click', async () => {
+    const { openSpeedReader } = await load()
+    openSpeedReader()
+  })
+</script>
