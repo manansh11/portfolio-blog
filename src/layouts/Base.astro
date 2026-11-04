@@ -67,9 +67,7 @@ const ogImage = new URL('/og.png', Astro.site).href
     <div class="site-container flex flex-col min-h-screen">
       <slot name="header" />
       <main class="flex-1"><slot /></main>
-      <div class="breath-divider" aria-hidden="true">
-        <span class="breath-dot"></span>
-      </div>
+      <div class="site-divider" aria-hidden="true"></div>
       <Footer />
     </div>
     <!-- Speed Insights. Web Analytics isn't enabled on the Vercel project, so its script would 404 -->

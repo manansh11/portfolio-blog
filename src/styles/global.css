@@ -582,19 +582,15 @@ body {
 
 /* ─── Breathing light ─── */
 
-.breath-divider {
-  text-align: center;
+.site-divider {
+  height: 1px;
   margin: 64px 0;
+  background: linear-gradient(90deg, transparent, rgba(167, 139, 250, 0.16), transparent);
 }
 
-.breath-dot {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--violet);
-  box-shadow: 0 0 14px var(--glow-strong);
-  animation: breathe 10s ease-in-out infinite;
+/* posts already end on the footer nav's rule; keep the spacing, skip a second line */
+main:has(.post-footer) + .site-divider {
+  background: none;
 }
 
 @keyframes breathe {
@@ -1157,7 +1153,6 @@ table {
 
 @media (prefers-reduced-motion: reduce) {
   .orb,
-  .breath-dot,
   .prose hr::after {
     animation: none;
   }
