@@ -9,45 +9,40 @@ This is a personal blog built with Astro as a fully static site (no client JS ex
 ## Essential Commands
 
 ```bash
-# Development
-npm run dev          # Start development server on http://localhost:3000
-
-# Production
-npm run build        # Build for production
-npm run start        # Start production server
-
-# Testing
-# No test framework is currently configured
+pnpm dev        # dev server on http://localhost:4321
+pnpm build      # static build into dist/
+pnpm preview    # serve dist/ locally
 ```
+
+No test framework is configured.
 
 ## Architecture
 
 ### Tech Stack
-- **Framework**: Next.js (canary version with App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS v4.0.0-alpha
-- **Content**: MDX for blog posts
-- **Font**: Geist (Vercel's font family)
+- **Framework**: Astro (static output, pinned version), deployed on Vercel via `vercel.json`
+- **Styling**: plain CSS in `src/styles/global.css` (Tailwind preflight vendored at the top, no Tailwind dependency)
+- **Content**: MDX posts in `app/blog/posts/`, loaded in place by `src/content.config.ts`
+- **Font**: Inter, self-hosted in `public/fonts/` (`src/styles/fonts.css`)
 
 ### Directory Structure
-- `app/` - Next.js App Router pages and layouts
-  - `api/` - API routes for homepage and posts data
-  - `blog/` - Blog functionality
-    - `posts/` - MDX blog post files
-- `components/` - Reusable React components
-- `lib/` - Utility functions and blog post logic
-- `public/` - Static assets
+- `app/blog/posts/` - post files (path kept from the Next.js era)
+- `src/pages/` - `index.astro` (numbered index), `blog/[slug].astro`, `404.astro`, `rss.xml.ts`, `sitemap.xml.ts`, `robots.txt.ts`
+- `src/layouts/Base.astro` - head/meta, aurora orbs, footer, Vercel analytics scripts
+- `src/components/` - `Header.astro`, `Footer.astro`
+- `src/lib/posts.ts` - `getNumberedPosts` (oldest = 1, ties by slug), reading time, date format
+- `src/scripts/speed-reader.ts` - vanilla speed reader, imported only on first use
+- `public/` - static assets, `og.png`
 
-### Key Components
-- **MDX Blog System**: Posts are stored as `.mdx` files in `app/blog/posts/`
-- **Post Utilities**: `app/blog/utils.ts` handles post fetching, numbering (`getNumberedPosts`), and metadata
-- **Homepage = Index**: the homepage is the full numbered post index; `/blog` permanently redirects to `/` (next.config.mjs), `/blog/[slug]` serves posts
-- **Header**: client component; centered masthead on `/`, compact row elsewhere
+### Key Behaviors
+- **Zero JS by default**: only the speed reader loads JS, on hover/click. Reading progress is a CSS scroll-driven animation.
+- **Homepage = Index**: `/blog`, `/about` redirect to `/`; `/rss` redirects to `/rss.xml` (all in `vercel.json`)
+- **Clean URLs**: `build.format: 'file'` + `cleanUrls` in `vercel.json`, so posts live at `/blog/<slug>`
+- **Header**: `<Header home />` on the index, compact elsewhere
 
 ### Styling Guidelines ("ethereal" design — see docs/plans/2026-06-09-ethereal-redesign-design.md)
-Dark only, no theme toggle. Tokens in `app/global.css`:
+Dark only, no theme toggle. Tokens in `src/styles/global.css`:
 - Background: deep space `#06060F` with fixed aurora orbs (blurred radial gradients, slow drift)
-- Type: Inter via next/font, light weights; titles use white→violet gradient text (`.text-light-gradient`)
+- Type: Inter (self-hosted), light weights; titles use white→violet gradient text (`.text-light-gradient`)
 - Accent: violet `#A78BFA` / blue `#7DABF8`; labels use `.text-accent-gradient`
 - Interaction rule: hover states glow (text-shadow halos), nothing inverts or moves
 - Signature: breathing dot (10s cycle) as divider and as `hr` in prose; respect prefers-reduced-motion
@@ -61,6 +56,6 @@ Blog posts focus on:
 
 When adding new blog posts:
 1. Create `.mdx` file in `app/blog/posts/`
-2. Include proper frontmatter (title, date, summary)
+2. Include frontmatter: title, date, description
 3. Follow existing post naming convention (kebab-case)
 4. Ensure mobile responsiveness for any custom components
